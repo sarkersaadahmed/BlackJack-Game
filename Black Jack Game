@@ -7,9 +7,12 @@
     <script src="script.js"></script>
     <title>Document</title>
     <style>
-        /* Add CSS styles to change text color to black */
-        #messageEl, #sumEl, #firstCardEl, #secondCardEl, #cardsEl, #notificationEl {
+        /* Styles here */
+        #sumEl, #firstCardEl, #secondCardEl, #cardsEl, #notificationEl {
             color: black;
+        }
+        #messageEl {
+            color: goldenrod;
         }
     </style>
 </head>
@@ -18,20 +21,23 @@
     <p id="sumEl">Sum: </p>
     <p id="firstCardEl">First Card: </p>
     <p id="secondCardEl">Second Card: </p>
+    <p id="thirdCardEl">Third Card: </p>
     <p id="cardsEl">Cards: </p>
     <p id="notificationEl">Notification: </p>
     <button onclick="startGame()" id="startGame">Start Game</button>
 
     <script>
+        // Declare the DOM elements in the global scope
+        let messageEl = document.getElementById("messageEl");
+        let sumEl = document.getElementById("sumEl");
+        let firstCardEl = document.getElementById("firstCardEl");
+        let secondCardEl = document.getElementById("secondCardEl");
+        let cardsEl = document.getElementById("cardsEl");
+        let notificationEl = document.getElementById("notificationEl");
+        let thirdCardEl = document.getElementById("thirdCardEl")
         document.addEventListener("DOMContentLoaded", function() {
             // Set a static welcome message
             let message = "Welcome to this Black Jack Game";
-            let messageEl = document.getElementById("messageEl");
-            let sumEl = document.getElementById("sumEl");
-            let firstCardEl = document.getElementById("firstCardEl");
-            let secondCardEl = document.getElementById("secondCardEl");
-            let cardsEl = document.getElementById("cardsEl");
-            let notificationEl = document.getElementById("notificationEl");
             if (messageEl) {
                 messageEl.textContent = message;
             }
@@ -53,17 +59,19 @@
                     let min_value = 1;
                     let max_value = 10;
                     let thirdCard = Math.floor(Math.random() * (max_value - min_value + 1)) + min_value;
-                    total += thirdCard;
+                    total += parseInt(thirdCard);
                     cardsEl.textContent += ", " + thirdCard;
-
+                    thirdCard.textContent
                     if (total === 21) {
                         let notification = "You've won a black jack";
                         notificationEl.textContent = notification; // Set the notification text
-                        console.log("You've got a BlackJack");
+                        console.log(notification);
                     } else if (total > 21) {
-                        console.log("You are out of this game");
+                        let notification = "You are out of this game";
+                        notificationEl.textContent = notification; // Set the notification text
+                        console.log(notification);
                     } else {
-                        console.log("Sorry, invalid input");
+                        console.log("Your total is " + total);
                     }
                 } else if (thirdChoice.toLowerCase() === "no") {
                     console.log("Alright then");
@@ -72,7 +80,9 @@
                     alert("Invalid input. Please enter 'Yes' or 'No'.");
                 }
             } else {
-                console.log("Your total is " + total);
+                let notification = "Your total is " + total;
+                notificationEl.textContent = notification; // Set the notification text
+                console.log(notification);
             }
         }
     </script>
