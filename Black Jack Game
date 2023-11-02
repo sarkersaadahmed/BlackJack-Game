@@ -61,7 +61,7 @@
                     let thirdCard = Math.floor(Math.random() * (max_value - min_value + 1)) + min_value;
                     total += parseInt(thirdCard);
                     cardsEl.textContent += ", " + thirdCard;
-                    thirdCard.textContent
+                    thirdCard.textContent = thirdCard
                     if (total === 21) {
                         let notification = "You've won a black jack";
                         notificationEl.textContent = notification; // Set the notification text
