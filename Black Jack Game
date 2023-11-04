@@ -66,8 +66,8 @@
         let messageEl, sumEl, cardsEl, notificationEl, firstCardEl, secondCardEl;
 
         function startGame() {
-            firstCard = Math.floor(Math.random() * 10) + 1;
-            secondCard = Math.floor(Math.random() * 10) + 1;
+            firstCard = Math.floor(Math.random() * 11) + 1;
+            secondCard = Math.floor(Math.random() * 11) + 1;
             cards = [firstCard, secondCard];
             sum = firstCard + secondCard;
             hasBlackJack = false;
@@ -123,6 +123,7 @@
     </script>
 </body>
 </html>
+
 
 
 
