@@ -6,42 +6,82 @@
     <link rel="stylesheet" href="style.css" />
     <title>BlackJack Game</title>
     <style>
-        /* Styles here */
-        #sumEl, #firstCardEl, #secondCardEl, #thirdCardEl, #cardsEl, #notificationEl {
-            color: black;
+        /* Styles for the body and header */
+        body {
+            background-color: #2C3E50;
+            font-family: Arial, sans-serif;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
         }
-        #messageEl {
+        h1 {
             color: goldenrod;
+        }
+
+        /* Styles for container */
+        .container {
+            background-color: #34495E;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Styles for buttons */
+        button {
+            background-color: #3498DB;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980B9;
+        }
+
+        /* Styles for card elements */
+        p {
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
-    <h1 id="messageEl">Welcome to BlackJack game</h1>
-    <p id="sumEl">Sum: </p>
-    <p id="firstCardEl">First Card: </p>
-    <p id="secondCardEl">Second Card: </p>
-    <p id="thirdCardEl">Third Card: </p>
-    <p id="cardsEl">Cards: </p>
-    <p id="notificationEl">Notification: </p>
-    <button onclick="startGame()" id="startGame">Start Game</button>
+    <div class="container">
+        <h1 id="messageEl">Welcome to BlackJack game</h1>
+        <p id="sumEl">Sum: </p>
+        <p id="firstCardEl">First Card: </p>
+        <p id="secondCardEl">Second Card: </p>
+        <p id="thirdCardEl">Third Card: </p>
+        <p id="cardsEl">Cards: </p>
+        <p id="notificationEl">Notification: </p>
+        <button onclick="startGame()" id="startGame">Start Game</button>
+    </div>
 
     <script>
-        let firstCard = prompt("Please enter the first card: ");
-        let secondCard = prompt("Please enter the second card: ");
-        let cards = [firstCard, secondCard];
-        let sum = parseInt(firstCard) + parseInt(secondCard);
-        let hasBlackJack = false;
-        let isAlive = false;
-        let message = " ";
-        let notification = " ";
-        let messageEl = document.getElementById("messageEl");
-        let sumEl = document.getElementById("sumEl");
-        let cardsEl = document.getElementById("cardsEl");
-        let notificationEl = document.getElementById("notificationEl");
-        let firstCardEl = document.getElementById("firstCardEl");
-        let secondCardEl = document.getElementById("secondCardEl");
+        let firstCard, secondCard, cards, sum, hasBlackJack, isAlive, message, notification;
+        let messageEl, sumEl, cardsEl, notificationEl, firstCardEl, secondCardEl;
 
         function startGame() {
+            firstCard = Math.floor(Math.random() * 10) + 1;
+            secondCard = Math.floor(Math.random() * 10) + 1;
+            cards = [firstCard, secondCard];
+            sum = firstCard + secondCard;
+            hasBlackJack = false;
+            isAlive = true;
+            message = " ";
+            notification = " ";
+
+            messageEl = document.getElementById("messageEl");
+            sumEl = document.getElementById("sumEl");
+            cardsEl = document.getElementById("cardsEl");
+            notificationEl = document.getElementById("notificationEl");
+            firstCardEl = document.getElementById("firstCardEl");
+            secondCardEl = document.getElementById("secondCardEl");
+
             renderGame();
         }
 
@@ -56,23 +96,32 @@
                 newCard();
             } else if (sum === 21) {
                 notification = "You've got BlackJack";
+                hasBlackJack = true;
             } else {
                 notification = "Sorry, you are out of the game";
+                isAlive = false;
             }
             messageEl.textContent = message;
             notificationEl.textContent = notification;
+
+            if (!isAlive) {
+                document.getElementById("startGame").disabled = true;
+            }
         }
 
         function newCard() {
-            let min = 1;
-            let max = 10;
-            let thirdChoice = parseInt(Math.random() * (max - min + 1) + min);
-            sum += thirdChoice;
+            min_value = 1;
+            max_value = 10;
+            thirdChoice = parseInt(Math.random() * (max_value - min_value + 1) + min_value)
             cards.push(thirdChoice);
-            message = "Your final cards are " + cards.join(", ");
-            renderGame();
+            cardsEl.textContent = cards
+            console.log(cards);
         }
+
+
+        startGame(); // Automatically start the game when the page loads
     </script>
 </body>
 </html>
+
 
