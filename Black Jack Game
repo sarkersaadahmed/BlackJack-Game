@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-    <title>Document</title>
+    <title>BlackJack Game</title>
     <style>
         /* Styles here */
         #sumEl, #firstCardEl, #secondCardEl, #thirdCardEl, #cardsEl, #notificationEl {
@@ -47,11 +46,12 @@
         function startGame() {
             let firstCard = prompt("Please enter your first card");
             let secondCard = prompt("Please enter your second card");
+            let cards = [firstCard, secondCard];
             let total = parseInt(firstCard) + parseInt(secondCard);
             sumEl.textContent = "Sum: " + total;
             firstCardEl.textContent = "First Card: " + firstCard;
             secondCardEl.textContent = "Second Card: " + secondCard;
-            cardsEl.textContent = "Cards: " + firstCard + ", " + secondCard;
+            cardsEl.textContent = "Cards: " + cards[0] + ", " + cards[1];
 
             if (total < 21) {
                 let thirdChoice = prompt("Would you like to have a third card [Yes/No]");
@@ -60,12 +60,12 @@
                     let min_value = 1;
                     let max_value = 10;
                     let thirdCard = Math.floor(Math.random() * (max_value - min_value + 1)) + min_value;
+                    cards.push(thirdCard);
                     total += thirdCard;
-                    cardsEl.textContent += ", " + thirdCard;
                     thirdCardEl.textContent = "Third Card: " + thirdCard;
-
+                    
                     if (total === 21) {
-                        let notification = "You've won a black jack";
+                        let notification = "You've won a blackjack";
                         notificationEl.textContent = notification;
                         console.log(notification);
                     } else if (total > 21) {
@@ -86,6 +86,9 @@
                 notificationEl.textContent = notification;
                 console.log(notification);
             }
+            
+            // Log the cards array inside the startGame function
+            console.log(cards);
         }
     </script>
 </body>
