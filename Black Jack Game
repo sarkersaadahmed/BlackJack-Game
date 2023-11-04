@@ -26,49 +26,51 @@
     <button onclick="startGame()" id="startGame">Start Game</button>
 
     <script>
-        let firstCard = prompt("Please enter the first card: ")
-        let secondCard = prompt("Please enter the second card: ")
-        let cards = [firstCard, secondCard]
-        let sum = parseInt(firstCard) + parseInt(secondCard)
-        let hasBlackJack = false
-        let isAlive = false
-        let message = " "
-        let notification = " "
-        let messageEl = document.getElementById("messageEl"); // Fixed the typo here
-        let sumEl = document.getElementById("sumEl"); // Fixed the typo here
-        let cardsEl = document.getElementById("cardsEl"); // Fixed the typo here
+        let firstCard = prompt("Please enter the first card: ");
+        let secondCard = prompt("Please enter the second card: ");
+        let cards = [firstCard, secondCard];
+        let sum = parseInt(firstCard) + parseInt(secondCard);
+        let hasBlackJack = false;
+        let isAlive = false;
+        let message = " ";
+        let notification = " ";
+        let messageEl = document.getElementById("messageEl");
+        let sumEl = document.getElementById("sumEl");
+        let cardsEl = document.getElementById("cardsEl");
         let notificationEl = document.getElementById("notificationEl");
         let firstCardEl = document.getElementById("firstCardEl");
         let secondCardEl = document.getElementById("secondCardEl");
+
         function startGame() {
             renderGame();
         }
 
         function renderGame() {
-            cardsEl.textContent = "Cards : " + cards[0] + " " + cards[1];
-            sumEl.textContent = "Sum : " + sum; // Fixed the sum display
-            for (let count = 0; count < cards.length; count++) { // Fixed the loop condition
+            cardsEl.textContent = "Cards: " + cards[0] + ", " + cards[1];
+            firstCardEl.textContent = "First Card: " + cards[0];
+            secondCardEl.textContent = "Second Card: " + cards[1];
+            sumEl.textContent = "Sum: " + sum;
 
-            }
             if (sum <= 20) {
-                notification = "Do you want to draw a new card?: ";
+                notification = "Do you want to draw a new card?";
                 newCard();
             } else if (sum === 21) {
-                notification = "You've got BlackJack ";
+                notification = "You've got BlackJack";
             } else {
                 notification = "Sorry, you are out of the game";
             }
-            messageEl.textContent = message; // Updated the messageEl content
-            notificalEl.textContent = notification
+            messageEl.textContent = message;
+            notificationEl.textContent = notification;
         }
 
         function newCard() {
-            let min = 1; // Fixed the variable names
-            let max = 10; // Fixed the variable names
-            let thirdChoice = parseInt(Math.random() * (max - min + 1) + min); // Fixed the random number generation
+            let min = 1;
+            let max = 10;
+            let thirdChoice = parseInt(Math.random() * (max - min + 1) + min);
             sum += thirdChoice;
-            cards.push(thirdChoice); // Added the new card to the cards array
-            notification = "Your final cards are " + cards.join(" "); // Fixed the message content
+            cards.push(thirdChoice);
+            message = "Your final cards are " + cards.join(", ");
+            renderGame();
         }
     </script>
 </body>
