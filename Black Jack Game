@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +16,7 @@
             padding: 20px;
             margin: 0;
         }
+
         h1 {
             color: goldenrod;
         }
@@ -49,6 +51,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1 id="messageEl">Welcome to BlackJack game</h1>
@@ -58,12 +61,13 @@
         <p id="thirdCardEl">Third Card: </p>
         <p id="cardsEl">Cards: </p>
         <p id="notificationEl">Notification: </p>
+        <p id="nameEl">Name: </p>
         <button onclick="startGame()" id="startGame">Start Game</button>
     </div>
 
     <script>
-        let firstCard, secondCard, cards, sum, hasBlackJack, isAlive, message, notification;
-        let messageEl, sumEl, cardsEl, notificationEl, firstCardEl, secondCardEl;
+        let firstCard, secondCard, cards, sum, hasBlackJack, isAlive, message, notification, name;
+        let messageEl, sumEl, cardsEl, notificationEl, firstCardEl, secondCardEl, thirdCardEl, nameEl;
 
         function startGame() {
             firstCard = Math.floor(Math.random() * 11) + 1;
@@ -72,8 +76,9 @@
             sum = firstCard + secondCard;
             hasBlackJack = false;
             isAlive = true;
-            message = " ";
-            notification = " ";
+            message = "";
+            notification = "";
+            name = "Sarker Saad Ahmed";
 
             messageEl = document.getElementById("messageEl");
             sumEl = document.getElementById("sumEl");
@@ -81,7 +86,8 @@
             notificationEl = document.getElementById("notificationEl");
             firstCardEl = document.getElementById("firstCardEl");
             secondCardEl = document.getElementById("secondCardEl");
-
+            thirdCardEl = document.getElementById("thirdCardEl");
+            nameEl = document.getElementById("nameEl");
             renderGame();
         }
 
@@ -91,9 +97,14 @@
             secondCardEl.textContent = "Second Card: " + cards[1];
             sumEl.textContent = "Sum: " + sum;
 
+            if (cards.length === 3) {
+                thirdCardEl.textContent = "Third Card: " + cards[2];
+            } else {
+                thirdCardEl.textContent = "Third Card: ";
+            }
+
             if (sum <= 20) {
                 notification = "Do you want to draw a new card?";
-                newCard();
             } else if (sum === 21) {
                 notification = "You've got BlackJack";
                 hasBlackJack = true;
@@ -101,8 +112,10 @@
                 notification = "Sorry, you are out of the game";
                 isAlive = false;
             }
+
             messageEl.textContent = message;
             notificationEl.textContent = notification;
+            nameEl.textContent = "Name: " + name;
 
             if (!isAlive) {
                 document.getElementById("startGame").disabled = true;
@@ -110,20 +123,19 @@
         }
 
         function newCard() {
-            min_value = 1;
-            max_value = 10;
-            thirdChoice = parseInt(Math.random() * (max_value - min_value + 1) + min_value)
-            cards.push(thirdChoice);
-            cardsEl.textContent = cards
-            console.log(cards);
+            if (isAlive && !hasBlackJack && cards.length < 3) {
+                let card = Math.floor(Math.random() * 11) + 1;
+                cards.push(card);
+                sum += card;
+                renderGame();
+            }
         }
-
 
         startGame(); // Automatically start the game when the page loads
     </script>
 </body>
-</html>
 
+</html>
 
 
 
